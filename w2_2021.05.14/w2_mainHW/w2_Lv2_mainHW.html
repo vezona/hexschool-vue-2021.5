@@ -105,7 +105,7 @@
                         // 處理cookie
                         document.cookie = `hexToken=${token};expires=${new Date(expired)}; path=/`;
                         // 轉址
-                        // window.location = 'products.html'
+                        window.location = 'products.html'
                     } else {
                         alert(res.data.message);
                     }
