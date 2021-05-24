@@ -9,7 +9,28 @@
 </head>
 
 <body>
+    <div id="app">
+        {{ text }}
+    </div>
 
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = {
+            data() {
+                return {
+                    text: '這有一段話'
+                }
+            },
+            methods: {
+
+            },
+            create() {
+
+            }
+        };
+
+        Vue.createApp(app).mount('#app')
+    </script>
 </body>
 
 </html>
