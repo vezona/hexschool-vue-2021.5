@@ -1,1 +1,0 @@
-六角範例檔repo https://github.com/hexschool/live-vue3-training-chapter-works
