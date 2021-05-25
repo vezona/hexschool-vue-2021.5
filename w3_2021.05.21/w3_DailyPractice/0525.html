@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0525 每日任務</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            transition: all .3s;
+        }
+
+        .box.stretch,
+        .box.stretch {
+            width: 200px;
+        }
+
+        .box.colorChange,
+        .box.colorChange {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 5/25 每日任務連結：hackmd.io/lZGDZ1stRCu3VdRK2IrD5Q -->
+
+    <div id="app">
+        <div class="container p-3">
+            <h3>Q1. 延伸</h3>
+            <div class="box mb-3" :class="{'stretch':isTransform}"></div>
+            <h3>Q2. 延伸 + 變色 </h3>
+            <div class="box mb-3" :class="[{'stretch':isTransform},{'colorChange':isTransform}]"></div>
+        </div>
+        <button type="button" class="btn btn-primary" @click="isTransform=!isTransform">改變樣式</button>
+    </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = {
+            data() {
+                return {
+                    isTransform: false
+                }
+            },
+            methods: {
+
+            },
+            created() {
+
+            }
+        }
+
+        Vue.createApp(app).mount('#app');
+    </script>
+</body>
+
+</html>
