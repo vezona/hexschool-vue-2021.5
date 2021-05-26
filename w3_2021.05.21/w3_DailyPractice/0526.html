@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0526 每日任務</title>
+    <style>
+        html {
+            height: 1000px;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            transition: all .3s;
+        }
+
+        .box.stretch,
+        .box.stretch {
+            width: 200px;
+        }
+
+        .box.colorChange,
+        .box.colorChange {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container mt-3">
+            <!--  點擊送出表單時，取消預設不要跳轉  -->
+            <h3>Q1</h3>
+            <form @submit.prevent="onSubmit" class="mb-3">
+                <button>送出表單</button>
+            </form>
+
+            <!--  點擊"點擊按鈕"時，只會輸出 console.log 一次 -->
+            <h3>Q2</h3>
+            <button @click.once="executeOnce" class="mb-3">點擊按鈕</button>
+
+            <!--  只有按下 enter 時，才會console log 出 text 的內容  -->
+            <h3>Q3</h3>
+            <input type="text" v-model="text" @keyup.enter="onEnter">
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = {
+            data() {
+                return {
+                    text: ''
+                }
+            },
+            methods: {
+                onSubmit() {
+                    console.log('送出表單');
+                },
+                executeOnce() {
+                    console.log('點擊按鈕');
+                },
+                onEnter() {
+                    console.log(this.text);
+                }
+            }
+        }
+        Vue.createApp(app).mount('#app');
+    </script>
+</body>
+
+</html>
