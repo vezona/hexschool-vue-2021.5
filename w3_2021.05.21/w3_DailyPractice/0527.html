@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0527</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container mt-3">
+            <button type="button" class="me-3" @click="current='小明'">小明</button>
+            <button type="button" @click="current='漂亮阿姨'">漂亮阿姨</button>
+            <!-- 區塊一 -->
+            <div v-if="current==='小明'">
+                此區塊屬於 小明
+            </div>
+            <!-- 區塊二 -->
+            <div v-else-if="current==='漂亮阿姨'">
+                此區塊屬於 漂亮阿姨
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = {
+            data() {
+                return {
+                    current: '小明'
+                }
+
+            },
+            method: {
+
+            },
+            created() {
+
+            }
+        }
+
+        Vue.createApp(app).mount('#app');
+    </script>
+
+</body>
+
+</html>

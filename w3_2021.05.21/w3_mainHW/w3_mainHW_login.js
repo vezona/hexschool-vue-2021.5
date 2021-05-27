@@ -25,9 +25,9 @@ const app = {
                         const token = res.data.token,
                             expired = res.data.expired
                         console.log(token, expired)
-                        document.cookie = `hextoken=${token};expired=${new Date(expired)};path=/`
+                        document.cookie = `hextoken=${token};expired=${new Date(expired)}`
                         // 轉址
-                        window.location = 'try2.html'
+                        window.location = './w3_mainHW_products.html'
                     } else {
                         alert(res.data.message)
                     }
