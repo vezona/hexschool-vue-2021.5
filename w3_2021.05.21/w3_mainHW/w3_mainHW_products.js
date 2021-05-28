@@ -122,6 +122,10 @@ const product = {
                     }
                 })
 
+        },
+        addNewImg() {
+            this.tempProduct.imagesUrl = [];
+            this.tempProduct.imagesUrl.push('')
         }
 
     }
