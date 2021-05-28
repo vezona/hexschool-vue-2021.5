@@ -58,25 +58,38 @@
         crossorigin='anonymous'></script>
 
     <script>
-        const apiPath = "ffjjgogogo";
-        const container = document.querySelector(".container");
-        const productList = document.querySelector("#productList");
-        let apiPage = 1;
-        let productAPIData;
+        const app = {
+            // 資料
+            data: {
+                apiUrl: "https://vue3-course-api.hexschool.io/api",
+                apiPath: "ffjjgogogo",
+                apiPage: 1,
+                products: []
+            },
 
-        axios.get(`https://vue3-course-api.hexschool.io/api/${apiPath}/products?page=${apiPage}`)
-            .then(res => {
-                // console.log(res)
-                renderProductList(res)
-            }).catch();
+            // 方法
+            getData() {
+                axios.get(`${this.data.apiUrl}/${this.data.apiPath}/products?page=${this.data.apiPage}`)
+                    .then(res => {
+                        if (res.data.success) {
+                            this.data.products = res.data.products
+                            this.render()
+                        } else {
+                            alert('請先登入')
+                            window.location = './w2_Lv2_mainHW.html'
+                        }
+                    });
+            },
+            render() {
+                const container = document.querySelector(".container");
+                const productList = document.querySelector("#productList");
+                const productCount = document.querySelector('#productCount')
 
-        function renderProductList(data) {
-            // console.log(res)
-            let productLists = data.data.products;
-            let str = "";
-            console.log(productLists)
-            productLists.forEach(function (item, i) {
-                str += `
+                let productLists = this.data.products;
+                let str = "";
+                console.log(productLists)
+                productLists.forEach(function (item, i) {
+                    str += `
                 <tr>
                     <td> ${item.title}</td>
                     <td width="120">
@@ -93,13 +106,23 @@
                             data-action="remove" data-id=""> 刪除 </button>
                     </td>
                 </tr>`
-            })
+                })
 
-            productList.innerHTML = str;
+                productList.innerHTML = str;
+                productCount.innerHTML = productLists.length
+            },
 
+            // 先登入
+            created() {
+                // 取出 Token
+                const token = document.cookie.replace(/(?:(?:^|.*;\s*)hextoken\s*=\s*([^;]*).*$)|^.*$/, '$1');
+                axios.defaults.headers.common.Authorization = token;
 
-
+                this.getData();
+            }
         }
+
+        app.created();
     </script>
 </body>
 
