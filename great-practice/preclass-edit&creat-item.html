@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>self-Practice</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        #app {
+            max-width: 960px;
+            margin: auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 上方資料表格區 -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>標題</th>
+                    <th>圖片</th>
+                    <th>銷售狀態</th>
+                    <th>編輯</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 這邊把clsaa跟onstock的true/false綁定，如果是true就是綠色底 -->
+                <tr v-for="item in product" :key="item.id" :class="{'table-success':item.onStock}">
+                    <td>{{item.name}}</td>
+                    <td>
+                        <img :src="item.imageUrl" alt="" height="100">
+                    </td>
+                    <td>
+                        <!-- 這邊把checkbox 跟item中的onstock 綁定，如果是true就是綠色底 -->
+                        <input type="checkbox" v-model="item.onStock">
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-outline-primary" @click="editProduct(item)">修改</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 下方編輯區 -->
+        <form>
+            <div class="mb-3">
+                <label for="productName" class="form-label">產品名稱</label>
+                <input type="text" id="productName" class="form-control" v-model="tempProduct.name">
+            </div>
+            <div class="mb-3">
+                <img :src="tempProduct.imageUrl" class="img-fluid d-block" alt="" width="300">
+                <label for="productImage" class="form-label">產品圖片</label>
+                <input type="text" id="productImage" class="form-control" v-model="tempProduct.imageUrl">
+            </div>
+            <button type="button" class="btn btn-primary" @click="confirmEdit">更新</button>
+            <button type="button" class="btn btn-secondary ml-5" @click="clearEdit">全部清空</button>
+        </form>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        // 外部資料
+        const products = [{
+            id: '1',
+            imageUrl: 'https://images.unsplash.com/photo-1516906571665-49af58989c4e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=300&q=80',
+            name: 'MacBook Pro',
+            onStock: false,
+        }, {
+            id: '2',
+            imageUrl: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
+            name: 'iPhone',
+            onStock: false,
+        }];
+
+        // Vue綁定
+        const app = {
+            data() {
+                return {
+                    product: [],
+                    tempProduct: {
+                        name: '',
+                        imageUrl: ''
+                    }
+
+                }
+            },
+            created() {
+                this.product = products
+
+            },
+            methods: {
+                editProduct(i) {
+                    this.tempProduct = {
+                        ...i
+                    }
+                },
+                confirmEdit() {
+                    if (!this.tempProduct.id) {
+                        console.log('new item')
+                        // 因為是新建的物件沒有id，所以先用JS new Date的語法賦予它id
+                        this.tempProduct.id = new Date().getTime();
+                        this.tempProduct.onStock = false;
+                        // 接著把這個物件push回product這個總物件內
+                        this.product.push(this.tempProduct)
+                        // 最後清空資料區
+                        this.tempProduct = ''
+                    } else {
+                        this.product.forEach((item, i) => {
+                            if (item.id === this.tempProduct.id) {
+                                console.log(item)
+                                // 這邊不能直接用item= this.tempProduct，因為forEach沒有return值
+                                // 即使在這邊用了，也改動不了原物件的值
+                                //所以要用this.product，然後抓出第[i]個物件，再去等於
+                                this.product[i] = this.tempProduct
+                                // 最後清空資料區
+                                this.tempProduct = ''
+                            }
+                        })
+                    }
+                },
+                clearEdit() {
+                    this.tempProduct = ''
+                }
+            }
+        }
+        Vue.createApp(app).mount('#app');
+    </script>
+</body>
+
+</html>

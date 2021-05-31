@@ -1,9 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>05/31 每日任務</title>
-  </head>
-  <body></body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>05/31 每日任務</title>
+</head>
+
+<body>
+  <!-- 本日的任務是 Props 的觀念，請修改 Q1 ~ Q3 的程式，讓它們可以正確呈現 <template> 的內容。 -->
+  <!-- hackmd.io/tUkOkjRTRVCiHWmMIuCSGQ -->
+  <div id="app" class="p-3">
+    <!--   Q1   -->
+    <line-msg ？="安安學妹，要吃晚餐嗎？"></line-msg>
+    <!--   Q2   -->
+    <line-msg msg="..."></line-msg>
+    <!--   Q3    -->
+    <line-msg2 :nextMsg="message"></line-msg2>
+  </div>
+
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          message: '安安學妹，要吃晚餐嗎？'
+        }
+      }
+    })
+
+    app.component('line-msg', {
+      template: `<div>請正確呈現訊息：{{ msg }}</div>`,
+      props: ['msg']
+    })
+    app.component('line-msg2', {
+      template: `<div>請正確呈現訊息：{{ nextMsg }}</div>`,
+      props: ['nextMsg']
+    })
+
+    app.mount('#app');
+  </script>
+</body>
+
 </html>
