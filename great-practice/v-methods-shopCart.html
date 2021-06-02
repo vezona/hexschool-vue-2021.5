@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V methods shopCart</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <h3>使用 methods 處理複雜資料</h3>
+        <ul>
+            <li v-for="product in products">
+                {{ product.name }} / {{ product.price }}
+                <button type="button" @click="addToCart(product)">加入購物車</button>
+            </li>
+        </ul>
+        ...
+        <h6>購物車項目</h6>
+        <ul>
+            <li v-for="item in carts">{{ item.name }}</li>
+        </ul>
+        總金額 {{ sum }}
+
+        <h3>作為 $filter 使用（取代複雜表達式）</h3>
+        <p>{{convertToAmount(sum)}}</p>
+
+    </div>
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const App = {
+            data() {
+                return {
+                    num: 10,
+                    products: [{
+                            name: '蛋餅',
+                            price: 30,
+                            vegan: false
+                        },
+                        {
+                            name: '飯糰',
+                            price: 35,
+                            vegan: false
+                        },
+                        {
+                            name: '小籠包',
+                            price: 60,
+                            vegan: false
+                        },
+                        {
+                            name: '蘿蔔糕',
+                            price: 30,
+                            vegan: true
+                        },
+                    ],
+                    carts: [],
+                    sum: 0,
+                }
+            },
+            methods: {
+                addToCart(product) {
+                    this.carts.push(product)
+                    //接著要透過這個方法去觸發計算的方法
+                    this.calculate()
+                },
+                calculate() {
+                    let total = 0;
+                    this.carts.forEach(item => {
+                        total += item.price;
+                    });
+                    this.sum = total;
+                },
+                //把想塞的字串(複雜表達式)用方法封裝
+                convertToAmount(price) {
+                    return `NT$ ${price}`;
+                }
+            },
+            created() {
+                // this.trigger('由生命週期觸發');
+            }
+        };
+        Vue.createApp(App).mount('#app');
+    </script>
+</body>
+
+</html>

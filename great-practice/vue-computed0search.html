@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue computed search</title>
+</head>
+
+<body>
+    <div id="app">
+        <h3>Computed 常見技巧 - 搜尋</h3>
+        <input type="search" v-model="search">
+        <ul>
+            <li v-for="item in filterProducts">
+                {{ item.name }} / {{ item.price }}
+            </li>
+        </ul>
+
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const App = {
+            data() {
+                return {
+                    num: 10,
+                    search: '',
+                    products: [{
+                            name: '蛋餅',
+                            price: 30,
+                            vegan: false
+                        },
+                        {
+                            name: '飯糰',
+                            price: 35,
+                            vegan: false
+                        },
+                        {
+                            name: '小籠包',
+                            price: 60,
+                            vegan: false
+                        },
+                        {
+                            name: '蘿蔔糕',
+                            price: 30,
+                            vegan: true
+                        },
+                    ],
+                    carts: [],
+                    sum: 0,
+                }
+            },
+            computed: {
+                filterProducts() {
+                    return this.products.filter(item => {
+                        return item.name.match(this.search) //這邊使用match方法抓出符合的值
+                    })
+                }
+
+            },
+
+            methods: {
+                addToCart(product) {
+                    this.carts.push(product)
+                },
+            },
+            created() {
+                console.log(this);
+            }
+        };
+        Vue.createApp(App).mount('#app');
+    </script>
+</body>
+
+</html>

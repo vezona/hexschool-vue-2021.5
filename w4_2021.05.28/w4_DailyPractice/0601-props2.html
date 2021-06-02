@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>06/01 每日任務</title>
+</head>
+
+<body>
+  <!-- 請同學只修改 HTML 以及 JS 元件的 Props，讓 template 的內容可以正確呈現於畫面上。 -->
+  <!-- https://hackmd.io/VSO4yXL_R5GchYJOH0oe5Q -->
+  <div id="app" class="p-3">
+    <h1>請修正以下 HTML</h1>
+    <line-msg :msg1="message1" :msg2="message2" :arraymsg="msgObj"></line-msg>
+  </div>
+
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          message1: '有看到我的訊息嗎？',
+          message2: '這個工具可以傳遞 2 句話以上',
+          msgObj: ['也是', '可以', '傳遞陣列資料']
+        }
+      }
+    })
+
+    app.component('line-msg', {
+      template: `<div>
+      <span>請正確呈現訊息：{{ msg1 }}</span> <br>
+      <span>請正確呈現訊息：{{ msg2 }}</span> <br>
+      <p>請正確呈現訊息：<span v-for="item in arraymsg">{{ item }}</span></p>
+  </div>`,
+
+      // 只可以修正以下 props 
+      props: ['msg1', 'msg2', 'arraymsg']
+    })
+
+    app.mount('#app');
+  </script>
+</body>
+
+</html>

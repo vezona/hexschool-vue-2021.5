@@ -12,11 +12,11 @@
   <!-- hackmd.io/tUkOkjRTRVCiHWmMIuCSGQ -->
   <div id="app" class="p-3">
     <!--   Q1   -->
-    <line-msg ？="安安學妹，要吃晚餐嗎？"></line-msg>
+    <line-msg msg="安安學妹，要吃晚餐嗎？"></line-msg>
     <!--   Q2   -->
-    <line-msg msg="..."></line-msg>
+    <line-msg :msg="message"></line-msg>
     <!--   Q3    -->
-    <line-msg2 :nextMsg="message"></line-msg2>
+    <line-msg2 :next-msg="message"></line-msg2>
   </div>
 
   <script src="https://unpkg.com/vue@next"></script>
