@@ -8,10 +8,9 @@ export default {
     },
     template: '#deleteProductModal',
     methods: {
-        // showDelModal() {
-        //     delProductModal.show()
-        // }
-
+        openModal() {
+            delProductModal.show()
+        }
     },
     created() {},
     mounted() {
@@ -19,9 +18,13 @@ export default {
         // const delProduct = document.querySelector('#delProductModal')
         // delProductModal = new bootstrap.Modal(delProduct)
 
-        // vue2的寫法，vue3的$refs被ref()取代
+        // vue2,3要改用$refs去抓資料
         // console.log(this.$refs.delProductModal)
-        console.log(this.$refs.delProductModal)
+        const delProduct = this.$refs.delProductModal,
+            delProductModal = new bootstrap.Modal(delProduct)
+        console.log(delProductModal)
+
+
 
         // vue3 Composition 會用setup 搭配 ref()
         // const delProductModal = ref()

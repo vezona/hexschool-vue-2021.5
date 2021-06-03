@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0603</title>
+</head>
+
+<body>
+    <!-- hackmd.io/NOsnUGxVSA6j4HiRlvBJMw -->
+    <!-- 1. 只需要修改 mobile-phone 元件的 JS 程式碼，使其可向外傳遞訊息，並顯示於 newMessage。
+    2. 請維持單向數據流，避免直接修改外部的資料。
+    3. 完成 push 的函式，並與元件中的 @push-data=“getMessage” 進行對應。
+    4. 需要正確將內部資訊向外傳遞（關鍵口訣：前內後外） -->
+    <div id="app" class="p-3">
+        <h1>請為 mobile-phone 修正 JS 原始碼，並使其可向外傳遞訊息，並顯示於 newMessage。</h1>
+        {{ newMessage }}
+        <mobile-phone :msg="message" @push-data="getMessage"></mobile-phone>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    message: '晚餐吃什麼～，請回覆：「」',
+                    newMessage: '',
+                }
+            },
+            methods: {
+                getMessage(msg) {
+                    this.newMessage = msg;
+                }
+            }
+        })
+        app.component('mobile-phone', {
+            template: `<div>
+            <input class="me-3" v-model="message">
+            <button @click="push">傳送訊息</button>
+        </div>`,
+            props: ['msg'],
+
+            // 只需要修改以下的程式碼
+            data() {
+                return {
+                    message: this.msg
+                }
+            },
+            methods: {
+                push() {
+                    this.$emit('push-data', this.message)
+
+                }
+            }
+        })
+
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

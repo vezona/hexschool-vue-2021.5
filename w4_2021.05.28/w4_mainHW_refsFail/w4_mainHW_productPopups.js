@@ -15,8 +15,8 @@ export default {
     },
     mounted() {
         // 編輯或新增的Modal
-        const getShowProduct = document.querySelector('#productModal')
-        showProductModal = new bootstrap.Modal(getShowProduct)
+        // const getShowProduct = document.querySelector('#productModal')
+        // showProductModal = new bootstrap.Modal(getShowProduct)
 
     }
 }

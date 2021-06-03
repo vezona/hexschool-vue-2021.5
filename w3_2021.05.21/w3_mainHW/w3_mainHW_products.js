@@ -34,6 +34,7 @@ const product = {
         // 去建立BS實體才有辦法掛載data元件
         const newProductModal = document.querySelector('#productModal');
         productModal = new bootstrap.Modal(newProductModal)
+        console.log(newProductModal)
 
         const delProduct = document.querySelector('#delProductModal');
         delProductModal = new bootstrap.Modal(delProduct)
@@ -86,7 +87,7 @@ const product = {
             let http = 'post';
 
             // 修改商品 [API]: /api/:api_path/admin/product/:id ；PUT
-            if (this.isNew != 'new') {
+            if (this.isNew) {
                 editProductURL = `${this.apiURL}/${this.apiPath}/admin/product/${this.tempProduct.id}`;
                 http = "put"
             }
