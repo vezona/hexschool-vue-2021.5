@@ -11,8 +11,11 @@ const app = Vue.createApp({
             apiUrl: 'https://vue3-course-api.hexschool.io',
             apiPath: 'ffjjgogogo',
             products: [],
-            page: 0
-
+            page: 0,
+            isNew: true,
+            tempProduct: {
+                imagesUrl: []
+            },
         }
     },
     components: {
@@ -38,15 +41,28 @@ const app = Vue.createApp({
                     console.log(error)
                 })
         },
-        // 刪除
-        deleteProduct() {
-            // 跳出popup
-            delProductModal.show()
+        // 跳出modal，這邊是用refs的方式，由外層去觸發內層方法
+        showModal(detect, item) {
+            if (detect === "delete") {
+                this.tempProduct = {}
+                this.tempProduct = {
+                    ...item
+                }
+                this.$refs.deleteModal.openDelModal()
+            } else if (detect === "edit") {
+                this.isNew = false;
+                this.tempProduct = {}
+                this.tempProduct = {
+                    ...item
+                }
+                this.$refs.productModal.openProductModal()
+            } else if (detect === "new") {
+                this.tempProduct = {
+                    imagesUrl: [],
+                }
+                this.$refs.productModal.openProductModal()
+            }
         },
-        // 新增與編輯
-        showProduct() {
-            console.log('hi')
-        }
 
     },
     created() {
@@ -64,8 +80,6 @@ const app = Vue.createApp({
     },
     mounted() {}
 })
-
-// 元件
 
 // app.component(productPopups)
 app.mount('#app')
