@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0604 每日任務</title>
+</head>
+
+<body>
+
+    <div id="app" class="p-3">
+        <h1 class="mb-3">請使用 mitt 語法，將老媽的訊息傳送給 ming-phone</h1>
+        <h3>小明的手機</h3>
+        <ming-phone class="mb-3"></ming-phone>
+
+        <h3>老媽的手機</h3>
+        <mom-phone></mom-phone>
+    </div>
+
+    <script src="https://unpkg.com/mitt/dist/mitt.umd.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const emitter = mitt()
+
+        const app = Vue.createApp({})
+        app.component('ming-phone', {
+            template: `<div><strong>老媽傳來的訊息：</strong> {{ momMsg }}</div>`,
+            data() {
+                return {
+                    momMsg: ''
+                }
+            },
+            created() {
+                // 請在這裡補上 mitt .on() 的方法
+            }
+        })
+
+        app.component('mom-phone', {
+            template: `<div>
+      <input class="me-3" v-model="msg">
+      <button @click="pushData">傳送訊息</button>  
+  </div>`,
+            data() {
+                return {
+                    msg: '快回家，晚上煮好料 der'
+                }
+            },
+            methods: {
+                pushData() {
+                    // 請在這裡補上 mitt .emit() ... 的方法
+                }
+            }
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+
+</html>
