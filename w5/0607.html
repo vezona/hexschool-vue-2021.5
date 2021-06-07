@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0607 每日任務</title>
+</head>
+
+<body>
+    <!-- https://hackmd.io/DZ6B-1UCS0G8qV73FoJFIA -->
+
+    <!-- 運用 methods 作為 filter
+    參考範例中 {{ reverseText(text) }} 的方法，嘗試在 HTML 第 4 行，輸入特定方法，讓畫面顯示出 $ 1000 。
+    需使用到 Vue data 中的 cash。 -->
+
+    <div id="app">
+        {{ reverseText(text) }}
+        <br>
+        {{ dollarSign(cash) }}
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    text: '棒棒伯斯卡',
+                    cash: 1000
+                }
+            },
+            methods: {
+                reverseText(someText) {
+                    console.log(someText);
+                    return someText.split('').reverse().join('');
+                },
+
+                dollarSign(dollar) {
+                    return `$${dollar}`;
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
