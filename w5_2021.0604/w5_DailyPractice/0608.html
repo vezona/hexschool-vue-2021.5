@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0608 每日任務</title>
+</head>
+
+<body>
+    <!-- https://hackmd.io/Yw2pZK3HTO2hTMSG87oSQg -->
+
+    <!-- 練習運用 watch 監聽一個數值
+在 watch 中新增方法，讓畫面顯示「今年要繳的稅金為 xx 元」為實際輸入 input 數值的 20%，並且需為整數，實際狀況如圖: -->
+
+    <div id="app">
+        收入：
+        <input type="number" v-model="cash">
+        <br>
+        今年要繳的稅金為 {{ Taxes }} 元
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    cash: 0,
+                    Taxes: 0,
+                }
+            },
+            watch: {
+                cash() {
+                    this.Taxes = parseInt(this.cash * 0.2)
+                    if (this.cash === '') {
+                        this.Taxes = 0
+                    }
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
