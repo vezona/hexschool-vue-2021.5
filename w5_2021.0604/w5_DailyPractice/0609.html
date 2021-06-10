@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0609 每日任務</title>
+</head>
+
+<body>
+    <!-- https://hackmd.io/YoFLa6-oR-SJmL7sia_0IA -->
+    <!-- 使用 watch 監控 props
+    請在 new-input 元件的 watch 中監控 props 傳來的值，讓下方 input 和上方 input 顯示相同數值。
+    此次練習主要目的，是讓同學瞭解單向數據流的特性，無法直接修改 props 的值。 -->
+
+    <div id="app">
+        收入：
+        <input type="number" v-model="cash">
+        <br>
+        <new-input :prop-cash="cash"></new-input>
+        <!-- 如果要雙向綁定，寫回母元件的data
+        <new-input v-model:prop-cash="cash"></new-input> -->
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    cash: 0,
+                }
+            },
+        })
+        app.component('new-input', {
+            props: ['propCash'],
+            data() {
+                return {
+                    cash: 0,
+                }
+            },
+            //如果要雙向綁定，寫回母元件的data
+            // template: `<input type="number"  :value="propCash" @input="$emit('update:propCash',$event.target.value)"/>`,
+
+            template: `<input type="number"  v-model="cash"/>`,
+            watch: {
+                propCash() {
+                    this.cash = this.propCash
+                }
+            }
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

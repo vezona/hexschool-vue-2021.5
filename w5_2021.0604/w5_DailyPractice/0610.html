@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0610 每日任務</title>
+</head>
+
+<body>
+    <!-- https://hackmd.io/G2t1kXWxQNmZ9STO8GUNZg -->
+    <!-- 練習建置 computed
+    在 computed 中新增方法，讓畫面顯示「今年要繳的稅金為 xx 元」為實際輸入 input 數值的 20%，並且需為整數 -->
+
+    <div id="app">
+        收入：
+        <input type="number" v-model="cash">
+        <br>
+        今年要繳的稅金為 {{ taxes }} 元
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    cash: 0,
+                }
+            },
+            computed: {
+                taxes() {
+                    return parseInt(this.cash * 0.2)
+                }
+
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
