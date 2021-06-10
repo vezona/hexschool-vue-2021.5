@@ -42,7 +42,6 @@ const app = Vue.createApp({
                     // console.log(res)
                     this.products = res.data.products
                 })
-
         },
         openModal(item) {
             // 加入loading 圖示
