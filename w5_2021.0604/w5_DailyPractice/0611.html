@@ -9,9 +9,39 @@
 </head>
 
 <body>
+    <!-- https://hackmd.io/wKikKcx8Q6aBqEUP1M50LQ -->
+    <!-- 練習 refs 呼叫元件方法
+    請在 callComponent() 中，使用 $refs 的方法，
+    指向 alert-com 元件，讓使用者點擊 button 會執行 callAlert() ，跳出 alert 警告。 -->
+
+    <div id="app">
+        <button type="button" @click="callComponent">按我</button>
+        <br>
+        <component ref="alert"></component>
+    </div>
 
     <script src="https://unpkg.com/vue@next"></script>
-    <script></script>
+    <script>
+        const app = Vue.createApp({
+            methods: {
+                callComponent() {
+                    this.$refs.alert.callAlert()
+                },
+            }
+        })
+
+        app.component('component', {
+            template: `<div>我裡面藏了 Alert</div>`,
+            methods: {
+                callAlert() {
+                    alert('跳出警告了')
+
+                }
+            }
+        });
+
+        app.mount('#app');
+    </script>
 </body>
 
 </html>
