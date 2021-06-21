@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0614 每日任務</title>
+    <style>
+        .p3 {
+            padding: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- https://hackmd.io/fB_b-2dCR0udgnGezIr0Nw?view -->
+    <div id="app">
+        <router-link class="p3" to="/pageOne">1</router-link>|
+        <router-link class="p3" to="/pageTwo">2</router-link>
+        <router-view></router-view>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/vue-router@4.0.5/dist/vue-router.global.js"></script>
+    <script>
+        const app = Vue.createApp({});
+        const pageOne = {
+            template: `<div>第一頁</div>`
+        };
+        const pageTwo = {
+            template: `<div>第二頁</div>`
+        };
+
+        const router = VueRouter.createRouter({
+            history: VueRouter.createWebHashHistory(),
+            routes: [{
+                    'path': '/pageOne',
+                    'component': pageOne
+                },
+                {
+                    'path': '/pageTwo',
+                    'component': pageTwo
+                }
+            ]
+        })
+        app.use(router);
+
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

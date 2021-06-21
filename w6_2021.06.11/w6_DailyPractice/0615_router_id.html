@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0615 每日任務</title>
+    <style>
+        .p3 {
+            padding: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- https://hackmd.io/Narqu3TaRcGBzZe4CCPkPQ?view -->
+    <div id="app">
+        <router-link to="/pageOne" class="p3">1</router-link>|
+        <router-link to="/pageTwo/55" class="p3">2</router-link>
+        <router-view></router-view>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/vue-router@4.0.5/dist/vue-router.global.js"></script>
+    <script>
+        const app = Vue.createApp({});
+        const pageOne = {
+            template: `<div>第一頁</div>`
+        };
+        const pageTwo = {
+            data() {
+                return {
+                    param: ''
+                }
+            },
+            template: `<div>第二頁 / 路由 id: {{ param }}</div>`,
+            created() {
+                this.param = this.$route.params.id;
+                console.log(this.$route.params.id);
+            }
+        };
+
+        const router = VueRouter.createRouter({
+            history: VueRouter.createWebHashHistory(),
+            routes: [{
+                    path: '/pageOne',
+                    component: pageOne
+                }, {
+                    path: '/pageTwo/:id',
+                    component: pageTwo
+                },
+
+            ]
+        })
+        app.use(router);
+
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

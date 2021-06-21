@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0618 每日任務</title>
+</head>
+
+<body>
+    <!-- https://hackmd.io/JFfHMu6PSbiwS5TvFLYcRw -->
+    <div id="app">
+        <router-view name="top"></router-view>
+        <router-view name="down"></router-view>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/vue-router@4.0.5/dist/vue-router.global.js"></script>
+    <script>
+        const app = Vue.createApp({});
+        const topComponent = {
+            template: `<div>上方元件</div>`
+        };
+        const downComponent = {
+            template: `<div>下方元件</div>`
+        };
+
+        const router = VueRouter.createRouter({
+            history: VueRouter.createWebHashHistory(),
+            routes: [{
+                path: '/',
+                components: {
+                    top: topComponent,
+                    down: downComponent
+                }
+            }, ]
+        })
+        app.use(router);
+
+        app.mount('#app');
+    </script>
+</body>
+
+</html>
