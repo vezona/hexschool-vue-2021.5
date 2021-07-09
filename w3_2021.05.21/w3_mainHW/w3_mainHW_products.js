@@ -87,7 +87,7 @@ const product = {
             let http = 'post';
 
             // 修改商品 [API]: /api/:api_path/admin/product/:id ；PUT
-            if (this.isNew) {
+            if (this.isNewTitle) {
                 editProductURL = `${this.apiURL}/${this.apiPath}/admin/product/${this.tempProduct.id}`;
                 http = "put"
             }
